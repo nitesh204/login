@@ -1,117 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-        }
-        
-        .Login {
-            height: 100%;
-            width: 100%;
-            background-image: url(https://img.freepik.com/free-vector/halftone-background-with-circles_23-2148907689.jpg?w=900&t=st=1692367736~exp=1692368336~hmac=c7df189e123fe32c376cad719fd0497391233c25c3a64dd089bc2bce87d86f09);
-            background-position: center;
-            background-size: cover;
-            position: absolute;
-        }
-        
-        .form-box {
-            width: 380px;
-            height: 480px;
-            position: relative;
-            margin: 6% auto;
-            background: white;
-            padding: 5px;
-            overflow: hidden;
-        }
-        
-        .button-box {
-            width: 220px;
-            margin: 35px auto;
-            position: relative;
-            box-shadow: 0 0 20px 9px #ff61241f;
-            border-radius: 30px;
-        }
-        
-        .toggle-btn {
-            padding: 10px 30px;
-            cursor: pointer;
-            background: transparent;
-            border: 0;
-            outline: none;
-            position: relative;
-        }
-        
-        #btn {
-            top: 0;
-            left: 0;
-            position: absolute;
-            width: 110px;
-            height: 100%;
-            background: lightgreen;
-            border-radius: 30px;
-            transition: .5s;
-        }
-        
-        .social-icons {
-            margin-right: 30px auto;
-            text-align: center;
-        }
-        
-        
-        .input-group {
-            top: 180px;
-            position: absolute;
-            width: 280px;
-            transition: .5s;
-        }
-        
-        .input-field {
-            width: 100%;
-            padding: 10px 0;
-            margin: 5px 0;
-            border-top: 0;
-            border-left: 0;
-            border-right: 0;
-            border-bottom: 1px solid #999;
-            outline: none;
-            background: transparent;
-        }
-        
-        .submit-btn {
-            width: 90%;
-            padding: 10px 30px;
-            cursor: pointer;
-            display: block;
-            margin: auto;
-            background: lightgreen;
-            border: 0;
-            outline: none;
-            border-radius: 30px;
-        }
-        
-        .check-box {
-            margin: 30px 10px 30px 0;
-        }
-        
-        span {
-            color: #777;
-            font-size: 12px;
-            bottom: 68px;
-            position: absolute;
-        }
-        
-        #login {
-            left: 50px;
-        }
-        
-        #register {
-            left: 450px;
-        }
-    </style>
 </head>
 <body>
     <div class="Login">
@@ -129,63 +23,30 @@
             </div>
             <form id="login" class="input-group" onsubmit="return validateLogin()">
                 <input type="text" class="input-field" placeholder="User id" pattern=".{5,}" title="User id Should Not Be Less Than 5 Character" required>
-                <input type="password" class="input-field" placeholder="Password" 
-       pattern="{.8,}" title="Password must be of 8 digit" required>
+                <div class="password-container">
+                    <input type="password" class="input-field" id="login-password" placeholder="Password" pattern=".{8,}" title="Password must be of 8 digits" required>
+                    <button type="button" class="show-password-btn" id="login-show" onclick="togglePassword('login-password', 'login-show')">
+                        <i class="fas fa-eye"></i> <!-- Eye Icon -->
+                    </button>
+                </div>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="Submit" class="submit-btn">Login</button>
             </form>
             <form id="register" class="input-group" onsubmit="return validateregister()">
                 <input type="email" class="input-field" placeholder="Email id" required>
-                <input type="password" class="input-field" placeholder="Enter Password" 
-       pattern=".{8,}" title="Password must be of 8 digit" required>
-       <input type="text" class="input-field" placeholder="Desired User id" 
-       pattern=".{5,}" title="User id must be of 5 digit" required>
+                <div class="password-container">
+                    <input type="password" class="input-field" id="register-password" placeholder="Enter Password" pattern=".{8,}" title="Password must be of 8 digits" required>
+                    <button type="button" class="show-password-btn" id="register-show" onclick="togglePassword('register-password', 'register-show')">
+                        <i class="fas fa-eye"></i> <!-- Eye Icon -->
+                    </button>
+                </div>
+                <input type="text" class="input-field" placeholder="Desired User id" pattern=".{5,}" title="User id must be of 5 digits" required>
                 <input type="checkbox" class="check-box" required><span>I Agree To The Terms And Conditions</span>
                 <button type="Submit" class="submit-btn">Register</button>
             </form>
         </div>
     </div>
-    <script>
-        var x = document.getElementById("login");
-        var y = document.getElementById("register");
-        var z = document.getElementById("btn");
 
-        function register() {
-            x.style.left = "-400px";
-            y.style.left = "50px";
-            z.style.left = "110px";
-        }
-
-        function logIn() {
-            x.style.left = "50px";
-            y.style.left = "450px";
-            z.style.left = "0";
-        }
-        function validateLogin() {
-            var userId = document.querySelector("#login input[type='text']").value;
-            var password = document.querySelector("#login input[type='password']").value;
-    
-            
-            if (userId === "userid" && password === "password") {
-                alert("Login successful!");
-                
-            } else {
-                alert("Login failed. Please check your credentials.");
-            }
-        }
-        function validateregister() {
-            var email = document.querySelector("#register input[type='email']").value;
-            var password = document.querySelector("#register input[type='password']").value;
-            var userId = document.querySelector("#register input[type='text']").value;
-
-            if (email === "email@gmail.com" && userId === "userid" && password === "password") {
-                alert("Registration successful! Please continue with Login");
-            } else {
-                alert("Registration failed. Please check your credentials.");
-            }
-            return false; 
-        }
-        
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
